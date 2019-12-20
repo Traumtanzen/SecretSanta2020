@@ -20,10 +20,12 @@ namespace SecretSanta.Services
                 gifters.OrderBy(n => n.Name);
                 List<User> giftsTo = new List<User>();
                 giftsTo.AddRange(context.Users);
-                giftsTo.OrderBy(o => Guid.NewGuid());
-                while (gifters.Count != 0)
+                Random r = new Random();
+                int randomIndex = 0;
+                randomIndex = r.Next(0, giftsTo.Count);
+                while (gifters.Count > 0)
                 {
-                    if (gifters.ElementAt(0).Name != giftsTo.ElementAt(0).Name)
+                    if (gifters.ElementAt(0).Name != giftsTo.ElementAt(randomIndex).Name)
                     {
                         Gifter newGifter = new Gifter();
                         newGifter.User = gifters.ElementAt(0);
@@ -35,7 +37,7 @@ namespace SecretSanta.Services
                     }
                     else
                     {
-                        giftsTo.OrderBy(o => Guid.NewGuid());
+                        randomIndex = r.Next(0, giftsTo.Count);
                     }
                 }
             }
