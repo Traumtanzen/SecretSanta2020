@@ -23,7 +23,7 @@ namespace SecretSanta.Services
                 giftsTo.OrderBy(o => Guid.NewGuid());
                 while (gifters.Count != 0)
                 {
-                    if (gifters.ElementAt(0) != giftsTo.ElementAt(0))
+                    if (gifters.ElementAt(0).Name != giftsTo.ElementAt(0).Name)
                     {
                         Gifter newGifter = new Gifter();
                         newGifter.User = gifters.ElementAt(0);
